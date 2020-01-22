@@ -7,9 +7,7 @@ node {
     def img = stage('Build') {
           docker.build("$IMAGE",  '.')
     }
-    stage('Run') {
-          img.withRun("--name run-$BUILD_ID -p 80:80")
-    }
+    
     stage('Push') {
           docker.withRegistry('', 'dockerhubcredentials') {
               img.push 'latest'
