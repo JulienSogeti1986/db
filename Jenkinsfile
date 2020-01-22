@@ -1,5 +1,5 @@
 node {
-   def registryProjet='https://hub.docker.com/repository/docker/kilokilo8/db'
+   def registryProjet='kilokilo8/db'
    def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
     stage('Clone') {
           checkout scm
@@ -13,10 +13,9 @@ node {
           }
     }
     stage('Push') {
-          docker.withRegistry('https://hub.docker.com/', 'dockerhubcredentials') {
+          docker.withRegistry('', 'dockerhubcredentials') {
               img.push 'latest'
               img.push()
           }
     }
 }
-
